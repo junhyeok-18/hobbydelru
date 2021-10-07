@@ -1,0 +1,122 @@
+@charset "UTF-8";
+@font-face {
+   font-family: 'malgun';
+   src: local('malgun'),
+      url('/resources/font/malgun.ttf') format('truetype');
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	color: #3E3A39;
+	font-family: 'malgun';
+	width: 100%;
+	height: 100%;
+}
+
+input, select {
+	padding-left: 5px;
+}
+
+/* 로그인 */
+.login_div {
+	margin: auto;
+	width: 1192px;
+	margin-top: 300px;
+}
+
+.login_logo_div {
+	display: inline-block;
+	width: 590px;
+}
+
+.login_id_pw_div {
+	display: inline-block;
+	width: 590px;
+	padding-bottom: 35px;
+}
+
+.login_table {
+	margin: auto;
+}
+
+.login_id_pw {
+	font-size: 15pt;
+	font-weight: bold;
+	padding-right: 40px;
+	font-weight: bold;
+}
+
+.login_input {
+	width: 180px;
+	height: 30px;
+	padding-right: 20px;
+}
+
+.login_button {
+	width: 95px;
+	height: 80px;
+	background-color: #333333;
+	border: none;
+	outline: none;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.bottom_button {
+	width: 150px;
+	height: 30px;
+	background-color: #333333;
+	border: none;
+	outline: none;
+	color: white;
+	font-size: 15px;
+	cursor: pointer;
+	margin-left: 5px;
+	margin-right: 10px;
+}
+
+.login_find_pw_div {
+	margin: auto;
+	width: 1192px;
+	text-align: center;
+	border-top: 1px solid #C9C9C9;
+	padding-top: 20px;
+	margin-top: 20px;
+}
+
+input[id="auto_login"] {
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+}
+
+.login_label {
+	font-weight: 500;
+	cursor: pointer;
+}
+
+/* 회원가입 */
+.join_div {
+	margin: auto;
+	width: 1200px;
+}
+
+.join_table {
+	margin: auto;
+	width: 100%;
+}
+
+li {
+	list-style: none; 
+	float: left; 
+	padding: 6px;
+}
+
+
+
+
+
+

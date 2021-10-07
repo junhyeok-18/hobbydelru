@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FileMapper">
+	<!-- 일반사용자 파일 조회 -->
+	<select id="user_kn_file_select" resultType="kr.co.vo.FileVO">
+		select kn_file_code, kn_code, kn_org_file_name, kn_file_extension, round(kn_file_size/1024, 1) as kn_file_size, 
+		kn_file_address, kn_reg_date, kn_update_date, kn_del_date, kn_activation from kn_file
+		where kn_code = #{kn_code} and kn_activation = 'Y' <include refid="kn_file_search"/>
+		order by kn_reg_date desc limit #{rowStart}, 10
+	</select>
+	
+	<!-- 일반사용자 파일 총 개수 조회 -->
+	<select id="user_kn_file_all_count" resultType="string">
+		select count(kf.kn_file_code) from kn_file kf left join kn_employee ke on kf.kn_code = ke.kn_code
+		where ke.kn_code = #{kn_code} and kf.kn_activation = 'Y' and ke.kn_activation = 'Y' <include refid="kn_file_search"/>
+	</select>
+	
+	<!-- 관리사용자 파일 조회 -->
+	<select id="admin_kn_file_select" resultType="kr.co.vo.FileVO" parameterType="kr.co.vo.SearchCriteria">
+	    select 
+		kf.kn_file_code, kf.kn_code, kd.kn_department_name as kn_department, kr.kn_rank_name as kn_rank, kp.kn_position_name as kn_position, ke.kn_name, kf.kn_org_file_name, 
+		kf.kn_file_extension, round(kf.kn_file_size/1024, 1) as kn_file_size, kf.kn_file_address, kf.kn_reg_date, kf.kn_update_date, kf.kn_del_date, kf.kn_activation 
+		from kn_file kf join kn_employee ke on kf.kn_code = ke.kn_code 
+   	 	join kn_department kd on ke.kn_department = kd.kn_department_code
+    	join kn_rank kr on ke.kn_rank = kr.kn_rank_code
+    	join kn_position kp on ke.kn_position = kp.kn_position_code
+		where kf.kn_activation = 'Y' and ke.kn_activation = 'Y' <include refid="kn_file_search"/>
+	 	order by kf.kn_file_code desc limit #{rowStart}, 10
+	</select>
+	
+	<!-- 관리자 파일 총 개수 조회 -->
+	<select id="kn_file_all_count" resultType="string">
+		select count(kf.kn_file_code) from kn_file kf left join kn_employee ke on kf.kn_code = ke.kn_code
+		where kf.kn_activation = 'Y' and ke.kn_activation = 'Y' <include refid="kn_file_search"/>
+	</select>
+	
+	<sql id="kn_file_search">
+		<if test="searchType != null">
+			<if test="searchType == 'kn_name'.toString()">and ke.kn_name like '%' #{keyword} '%'</if>
+			<if test="searchType == 'kn_id'.toString()">and ke.kn_id like '%' #{keyword} '%'</if>
+			<if test="searchType == 'kn_department'.toString()">and ke.kn_department = #{keyword}</if>
+			<if test="searchType == 'kn_rank'.toString()">and ke.kn_rank = #{keyword}</if>
+			<if test="searchType == 'kn_position'.toString()">and ke.kn_position = #{keyword}</if>
+			<if test="searchType == 'kn_file_extension'.toString()">and kf.kn_file_extension = #{keyword}</if>
+		</if>
+	</sql>
+	
+	<!-- 파일 업로드 전 로그인한 사용자 사번, 업로드 당일, 같은 파일명이 있는지 확인 -->
+	<select id="kn_file_upload_check" resultType="hashMap">
+		 select kn_file_code, kn_org_file_name, kn_file_address from kn_file
+		 where kn_code = #{kn_code} and date_format(now(),'%Y%m%d') = date_format(kn_reg_date,'%Y%m%d') and 
+		 kn_org_file_name = #{kn_org_file_name} and kn_file_extension = #{kn_file_extension} and kn_activation = 'Y'
+	</select>
+	
+	<!-- 파일 업로드 -->
+	<insert id="kn_file_upload">
+		insert into kn_file (kn_code, kn_org_file_name, kn_file_extension, kn_file_size, kn_file_address)
+		values (#{kn_code}, #{kn_org_file_name}, #{kn_file_extension}, #{kn_file_size}, #{kn_file_address})
+	</insert>
+	
+	<!-- 파일 다운 -->
+	<select id="kn_file_down" parameterType="string" resultType="hashMap">
+		select kn_org_file_name, kn_file_address from kn_file
+		where kn_file_code = #{kn_file_code}
+	</select>
+	
+	<!-- 파일 삭제 -->
+	<delete id="kn_file_delete" parameterType="string">
+		delete from kn_file where kn_file_code = #{kn_file_code}
+	</delete>
+</mapper>

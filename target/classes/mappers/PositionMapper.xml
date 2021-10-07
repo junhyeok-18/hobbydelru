@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PositionMapper">
+	<!-- 직책 조회 -->
+	<select id="kn_position_select" resultType="kr.co.vo.PositionVO">
+		select kn_position_code, kn_position_name from kn_position
+		where kn_activation = 'Y' order by kn_position_code
+	</select>
+</mapper>

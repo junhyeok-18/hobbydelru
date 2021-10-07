@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMapper">
+	<!-- 일반사용자 로그인 -->
+	<select id="user_login" resultType="kr.co.vo.UserVO">
+		select * from kn_employee where kn_id = #{kn_id} and kn_activation = 'Y' and kn_permission = '3'
+	</select>
+	
+	<!-- 관리사용자 로그인 -->
+	<select id="admin_login" resultType="kr.co.vo.UserVO">
+		select * from kn_employee where kn_id = #{kn_id} and kn_activation = 'Y' and kn_permission = '2'
+	</select>
+	
+	<!-- 관리자 로그인 -->
+	<select id="help_login" resultType="kr.co.vo.UserVO">
+		select * from kn_employee where kn_id = #{kn_id} and kn_activation = 'Y' and kn_permission = '1'
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="user_join">
+		insert into kn_employee (kn_code, kn_id, kn_pw, kn_name, kn_address, kn_join_date, kn_birthday, kn_carrier,
+		kn_phone1, kn_phone2, kn_phone3, kn_department, kn_rank, kn_position)
+		values (#{kn_code}, #{kn_id}, #{kn_pw}, #{kn_name}, #{kn_address}, #{kn_join_date}, #{kn_birthday}, #{kn_carrier},
+		#{kn_phone1}, #{kn_phone2}, #{kn_phone3}, #{kn_department}, #{kn_rank}, #{kn_position})
+	</insert>
+	
+	<!-- 아이디 중복확인 -->
+	<select id="user_id_check" resultType="int" parameterType="string">
+		select count(*) from kn_employee
+		where kn_id = #{kn_id}
+	</select>
+	
+	<!-- 자동 로그인 (로그인된 경우 해당 세션ID와 유효시간을 사원 정보 테이블에 세팅한다.) -->
+	<update id="user_keep_login">
+		update kn_employee set 
+		kn_session_key = #{kn_session_key},
+		kn_session_limit = #{kn_session_limit}
+		where kn_code = #{kn_code}
+	</update>
+	
+	<!-- 자동 로그인 (유효시간이 남아 있으면서 해당 세션ID를 가지는 사원 정보를 꺼내오는 부분) -->
+	<select id="user_session_key_check" resultType="kr.co.vo.UserVO">
+		select * from kn_employee
+		where kn_session_key = #{kn_session_key} and kn_session_limit > now()
+	</select>
+	
+	<!-- 모든 유저 상제 정보 조회 -->
+	<select id="kn_employee_select" resultType="kr.co.vo.UserVO">
+		select ke.kn_code, ke.kn_id, ke.kn_name, ke.kn_address, ke.kn_join_date, ke.kn_birthday, ke.kn_carrier, ke.kn_phone1, ke.kn_phone2, ke.kn_phone3,
+	    kd.kn_department_name as kn_department, kr.kn_rank_name as kn_rank, kp.kn_position_name as kn_position, ke.kn_reg_date, ke.kn_update_date, ke.kn_del_date
+	    from kn_employee ke join kn_department kd on ke.kn_department = kd.kn_department_code
+	    join kn_rank kr on ke.kn_rank = kr.kn_rank_code
+	    join kn_position kp on ke.kn_position = kp.kn_position_code
+	    where ke.kn_activation = 'Y' and ke.kn_permission = '3' <include refid="kn_employee_search"/> 
+	    order by kn_code limit #{rowStart}, 10
+	</select>
+	
+	<!-- 모든 유저 총 명수 조회 -->
+	<select id="kn_employee_all_count" resultType="string">
+		select count(ke.kn_code) from kn_employee ke
+		where ke.kn_activation = 'Y' and ke.kn_permission = '3' <include refid="kn_employee_search"/>
+	</select>
+	
+	<sql id="kn_employee_search">
+		<if test="searchType != null">
+			<if test="searchType == 'kn_name'.toString()">and ke.kn_name like '%' #{keyword} '%'</if>
+			<if test="searchType == 'kn_id'.toString()">and ke.kn_id like '%' #{keyword} '%'</if>
+			<if test="searchType == 'kn_department'.toString()">and ke.kn_department = #{keyword}</if>
+			<if test="searchType == 'kn_rank'.toString()">and ke.kn_rank = #{keyword}</if>
+			<if test="searchType == 'kn_position'.toString()">and ke.kn_position = #{keyword}</if>
+		</if>
+	</sql>
+</mapper>

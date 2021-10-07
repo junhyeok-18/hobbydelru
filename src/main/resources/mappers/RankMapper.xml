@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RankMapper">
+	<!-- 직급 조회 -->
+	<select id="kn_rank_select" resultType="kr.co.vo.RankVO">
+		select kn_rank_code, kn_rank_name from kn_rank
+		where kn_activation = 'Y' order by kn_rank_code
+	</select>
+</mapper>
