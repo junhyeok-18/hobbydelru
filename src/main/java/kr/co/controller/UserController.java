@@ -71,7 +71,7 @@ public class UserController {
 	public String User_Login(Model model, HttpSession session) throws Exception{
 		logger.info("일반사용자 로그인 화면");
 		
-		return "/user/login";
+		return "/user/main";
 	}
 	
 	//일반사용자 로그인 액션
