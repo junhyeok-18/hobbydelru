@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>(주)나이츠넷 문서 중앙화 시스템</title>
+	<title>하비델루</title>
 	
 	<!-- favicon -->
 	<link rel="icon" href="/resources/favicon/favicon.ico" type="image/x-icon">
@@ -20,110 +20,7 @@
 	<script type="text/JavaScript" src="/resources/js/jquery.alerts.js" ></script>
 </head>
 <body>
-	<form id="join_form">
-	<div class="join_div">
-		<table class="join_table" border="1">
-			<tr>
-				<td>사번</td>
-				<td>
-					<input type="text" name="kn_code" id="kn_code" maxlength="5" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-				</td>
-			</tr>
-			<tr>
-				<td>아이디</td>
-				<td>
-					<input type="text" name="kn_id" id="kn_id" maxlength="15" autocomplete="off" onkeyup="id_check_var()" oninput="this.value = this.value.replace(/[^a-z0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-					<button type="button" name="id_check_button" id="id_check_button">중복확인</button>
-				</td>
-			</tr>
-			<tr>  
-				<td>비밀번호</td>
-				<td>
-					<input type="password" name="kn_pw" id="kn_pw" maxlength="25" autocomplete="off" oninput="this.value = this.value.replace(/ /g, '').replace(/(\..*)\./g, '$1');">
-				</td>
-			</tr>
-			<tr>
-				<td>성명</td>
-				<td>
-					<input type="text" name="kn_name" id="kn_name" maxlength="30" autocomplete="off" oninput="this.value = this.value.replace(/[a-z0-9]|[ \[\]{}()?|`~!@#$%^&*-_+=,.;:\x27\x22]/g, '').replace(/(\..*)\./g, '$1');">
-				</td>
-			</tr>
-			<tr>
-				<td>주소지</td>
-				<td>
-					<input type="text" name="kn_address" id="kn_address" autocomplete="off" style="width: 80%;">
-				</td>
-			</tr>
-			<tr>
-				<td>입사일</td>
-				<td>
-					<input type="text" name="kn_join_date" id="kn_join_date" maxlength="8" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-				</td>
-			</tr>
-			<tr>
-				<td>생년월일</td>
-				<td>
-					<input type="text" name="kn_birthday" id="kn_birthday" maxlength="8" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-				</td>
-			</tr>
-			<tr>
-				<td>통신사</td>
-				<td>
-					<select name="kn_carrier" id="kn_carrier">
-						<option value="0" selected="selected">SKT</option>
-						<option value="1">KT</option>
-						<option value="2">LG</option>
-						<option value="3">별점</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>휴대폰번호</td>
-				<td>
-					<input type="text" name="kn_phone1" id="kn_phone1" maxlength="3" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-					<input type="text" name="kn_phone2" id="kn_phone2" maxlength="4" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-					<input type="text" name="kn_phone3" id="kn_phone3" maxlength="4" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-				</td>
-			</tr>
-			<tr>
-				<td>부서</td>
-				<td>
-					<select name="kn_department" id="kn_department">
-						<c:forEach var="kn_department" items="${kn_department}">
-							<option value="${kn_department.kn_department_code}">${kn_department.kn_department_name}</option>
-						</c:forEach>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>직급</td>
-				<td>
-					<select name="kn_rank" id="kn_rank">
-						<c:forEach var="kn_rank" items="${kn_rank}">
-							<option value="${kn_rank.kn_rank_code}">${kn_rank.kn_rank_name}</option>
-						</c:forEach>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>직책</td>
-				<td>
-					<select name="kn_position" id="kn_position">
-						<c:forEach var="kn_position" items="${kn_position}">
-							<option value="${kn_position.kn_position_code}">${kn_position.kn_position_name}</option>
-						</c:forEach>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<button type="button" name="back_button" id="back_button">취소</button>
-					<button type="button" name="join_button" id="join_button">회원가입</button>
-				</td>
-			</tr>
-		</table>
-	</div>
-	</form>
+	<input type="text"/>
 	
 <script type="text/javascript">
 	var id_check = 1;
