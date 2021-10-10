@@ -10,140 +10,183 @@
 	<!-- favicon -->
 	<link rel="icon" href="/resources/favicon/favicon.ico" type="image/x-icon">
 	
-	<!-- css -->
-	<link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+	<link rel="apple-touch-icon" sizes="57x57" href="/resources/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/resources/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/resources/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/resources/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/resources/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/resources/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/resources/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/resources/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/resources/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/resources/favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/resources/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/resources/favicon/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/resources/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	
+	<!-- css --> <!-- 
+	<link rel="stylesheet" href="/resources/css/style.css" type="text/css"> -->
 	<link rel="stylesheet" href="/resources/css/jquery.alerts.css" type="text/css">
 	
 	<!-- javascript -->
 	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 	<script type="text/JavaScript" src="/resources/js/javascript.js" ></script>
 	<script type="text/JavaScript" src="/resources/js/jquery.alerts.js" ></script>
+	<script type="text/JavaScript" src="/resources/js/html2canvas.js" ></script>
+	
+	<style type="text/css">
+		@charset "UTF-8";
+		@font-face {
+		   font-family: 'neodgm';
+		   src: local('neodgm'),
+		      url('/resources/font/neodgm_pro.ttf') format('truetype');
+		}
+	</style>
 </head>
-<body>
-	<input type="text"/>
+<body style="width: 100%; min-height: 100%; margin: 0; padding: 0;">
+	<select name="time" onchange="div1_change(this.value)">
+		<option value="1" selected="selected">오전</option>
+		<option value="2">오후</option>
+	</select>
+	
+	<input type="text" onkeyup="date_change(this.value)">
+	
+	<select name="time" onchange="div3_change(this.value)">
+		<option value="0" selected="selected">선택하셈</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+	</select>
+	
+	<select id="cos_click" onchange="cos_image_add(this)">
+		<option value="default" selected="selected">선택해</option>
+		<option value="물세안">물세안</option>
+		<option value="허블룸 콤부차 플랜트바이옴 세럼">허블룸 콤부차 플랜트바이옴 세럼</option>
+		<option value="이니스프리 그린티  세럼">이니스프리 그린티  세럼</option>
+		<option value="이니스프리 레티놀 시카 흔적 앰플">이니스프리 레티놀 시카 흔적 앰플</option>
+		<option value="스킨앤랩 베리어덤 인텐시브 크림">스킨앤랩 베리어덤 인텐시브 크림</option>
+	</select>
+	
+	<input type="text" id="cos_price">
+	
+	<button type="button" id="img_down">다운로드</button>
+	
+	<div id="div1" style="width: 1080px; height: 1080px; background-color: #EF7D29; display: flex; justify-content: center; align-items: center; font-family: neodgm">
+		<div id="div2" style="width: 1035px; height: 1035px; background-color: #FFFFFF; margin: auto; position: relative;">
+			<table style="margin: 24px 0px 0px 24px;">
+				<tr>
+					<td>
+						<img id="time_img" alt="morning" src="/resources/image/morning.png" style="width: 94px; margin-right: 24px;">
+					</td>
+					<td id="date" style="color: #EA5514; font-size: 70px;"></td>
+				</tr>
+			</table>
+			<div id="div3" style="width: 100%; text-align: center; margin-top:173px;">
+				<table style="height: 300px; margin: auto;">
+					<tr id="cosmetic">
+					</tr>
+				</table>
+			</div>
+			<div id="div4" style="width: 100%; position: absolute; bottom: 10px;"></div>	
+		</div>
+	</div>
 	
 <script type="text/javascript">
-	var id_check = 1;
+	var cos_image_address = "";
+	var cos_image_order = "";
+
+	function div1_change(obj) {
+		if(obj == 1) {
+			$("#div1").css("background-color", "#EF7D29");
+			$("#date").css("color", "#EA5514");
+			$("#time_img").attr("src", "/resources/image/morning.png");
+		} else {
+			$("#div1").css("background-color", "#036EB8");	
+			$("#date").css("color", "#005AA6");
+			$("#time_img").attr("src", "/resources/image/evening.png");
+		}
+	}
 	
-	$(document).ready(function() {
-		//취소 버튼 클릭 이벤트
-		$("#back_button").on("click", function() {
-			location.href = "/";
-		});
+	function date_change(obj) {
+		$("#date").html(obj);
+	}
+	
+	function div3_change(obj) {
+		var cos_image = "";
 		
-		//아이디 중복확인 버튼 클릭 이벤트
-		$("#id_check_button").on("click", function() {
-			id_check_action();
-		});
+		$("#cosmetic").empty();
+		$("#div4").empty();
 		
-		//회원가입 버튼 클릭 이벤트
-		$("#join_button").on("click", function() {
-			join_action();
+		if(obj != 0) {
+			for(var i=1; i<obj; i++) {
+				cos_image += "<td><img id='cos_image_" + i + "' src='/resources/image/question.png' style='width: 95px; cursor: pointer;' onclick='cos_image_change(" + i + ")'></td>";
+				cos_image += "<td><img src='/resources/image/next.png' style='margin: 0px 22px 0px 22px;'></td>";
+			}
+			
+			cos_image += "<td><img id='cos_image_" + obj + "' src='/resources/image/question.png' style='width: 95px; cursor: pointer;' onclick='cos_image_change(" + obj + ")'></td>";
+			
+			$("#cosmetic").append(cos_image);
+		} else {
+			$("#cosmetic").empty();
+			$("#div4").empty();
+		}
+	}
+	
+	function cos_image_change(obj) {
+		cos_image_order = obj;
+		$("#cos_click option:eq(0)").prop("selected", true);
+		$("#cos_info_div" + obj).remove();
+	}
+	
+	function cos_image_add(obj) {
+		cos_image_address = obj.value;
+		$("#cos_image_" + cos_image_order).attr("src", "/resources/image/cosmetic/" + cos_image_address + ".png");
+		
+		var cos_info = "";
+		
+		cos_info += "<div id='cos_info_div" + cos_image_order + "' style='width: 100%; display: inline-block;'>";
+		cos_info += "<div id='order_div" + cos_image_order + "' style='margin: 0px 20px 10px 47px; float: left;'>";
+		cos_info += "<img alt='" + cos_image_order + "' src='/resources/image/" + cos_image_order + ".png' style='width: 44px;'>";
+		cos_info += "</div>";
+		cos_info += "<div id='add_div" + cos_image_order + "' style='font-size: 34px; line-height: 45px; float: left;'>" + cos_image_address + "</div>";
+		cos_info += "<div id='bash_div" + cos_image_order + "' style='font-size: 20px; line-height: 45px; float: left;'>";
+		cos_info += "</div>";
+		cos_info += "<div id='price_div" + cos_image_order + "' style='font-size: 34px; line-height: 45px; float: right; margin-right: 47px;'>" + $("#cos_price").val() + "</div>";
+		cos_info += "</div>";
+
+		$("#div4").append(cos_info);
+		
+		var bash_info = "";
+		var bash_img = (1035-($("#order_div" + cos_image_order).outerWidth(true) + $("#add_div" + cos_image_order).outerWidth(true) + $("#price_div" + cos_image_order).outerWidth(true))) / 16;
+		
+		for(var i=1; i<bash_img; i++) {
+			bash_info += "<img alt='bash' src='/resources/image/bash.png' style='width: 16px; vertical-align: middle;'>";	
+		}
+		
+		if(cos_image_address != "물세안") {
+			$("#bash_div" + cos_image_order).append(bash_info);	
+		} else {
+			
+		}
+	}
+	
+	$(document).ready(function(){
+		$("#img_down").on("click",function(){
+			html2canvas($('#div1')[0]).then(function(canvas){
+				var img = document.createElement("a");
+				img.download = "test.png";
+				img.href=canvas.toDataURL();
+				document.body.appendChild(img);
+				img.click();
+			});
 		});
 	});
-	
-	//아이디 중복확인
-	function id_check_action() {
-		if($.trim($("#kn_id").val()).length < 1) {
-			alert("아이디를 입력해주세요.");
-			$("#kn_id").focus();
-			return false;
-		} else {
-			$.ajax({
-				url : "/user/id_check_action",
-				type : "post",
-				enctype : "multipart/form-data",
-				data :  {kn_id : $("#kn_id").val()},
-				success : function(data) {
-					if($.trim(data) == 0) {
-						alert("사용이 가능한 아이디 입니다.")
-						id_check = 0;
-						$("#kn_pw").focus();
-					} else {
-						alert("사용이 불가능한 아이디 입니다.");
-						id_check = 0;
-						$("#kn_id").focus();
-						return false;
-					}
-				},
-				error : function(data) {
-					alert("다시 시도해주시기 바랍니다.");
-				}
-			});
-		}
-	}	
-	
-	//아이디 텍스트 창 입력 시 변수 변경
-	function id_check_var() {
-		id_check = 1;
-	}
-	
-	//회원가입 액션
-	function join_action() {
-		if($.trim($("#kn_code").val()).length < 5) {
-			alert("사번을 입력해주세요.");
-			$("#kn_code").focus();
-			return false;
-		} else if($.trim($("#kn_id").val()).length < 1) {
-			alert("아이디를 입력해주세요.");
-			$("#kn_id").focus();
-			return false;
-		} else if(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{12,}$/.test($.trim($("#kn_pw").val())) == false) {
-			alert("영문 숫자 특수문자(!, @, $, %, &, * 만 허용)를 혼용하여 12자 이상을 입력해주세요");
-			$("#kn_pw").focus();
-			return false;
-		} else if($.trim($("#kn_name").val()).length < 1) {
-			alert("이름을 입력해주세요.");
-			$("#kn_name").focus();
-			return false;
-		} else if($.trim($("#kn_address").val()).length < 1) {
-			alert("주소지를 입력해주세요.");
-			$("#kn_address").focus();
-			return false;
-		} else if($.trim($("#kn_join_date").val()).length < 8) {
-			alert("입사일을 입력해주세요.");
-			$("#kn_join_date").focus();
-			return false;
-		} else if($.trim($("#kn_birthday").val()).length < 8) {
-			alert("생년월일을 입력해주세요.");
-			$("#kn_birthday").focus();
-			return false;
-		} else if($.trim($("#kn_phone1").val()).length < 3) {
-			alert("전화번호를 입력해주세요.");
-			$("#kn_phone1").focus();
-			return false;
-		} else if($.trim($("#kn_phone2").val()).length < 4) {
-			alert("전화번호를 입력해주세요.");
-			$("#kn_phone2").focus();
-			return false;
-		} else if($.trim($("#kn_phone3").val()).length < 4) {
-			alert("전화번호를 입력해주세요.");
-			$("#kn_phone3").focus();
-			return false;
-		} else if(id_check == 1) {
-			alert("아이디 중복확인을 해주세요.");
-			$("#kn_id").focus();
-			return false;
-		} else {
-			var form = $('#join_form')[0];
-	        var data = new FormData(form);
-			$.ajax({
-				url : "/user/join_action",
-				type : "post",
-				enctype : "multipart/form-data",
-				processData: false,
-	            contentType: false,
-				data :  data,
-				success : function(data) {
-					alert("회원가입에 성공하셨습니다.");
-					location.href = "/";
-				},
-				error : function(data) {
-					alert("다시 시도해주시기 바랍니다.");
-				}
-			});
-		}
-	}
 </script>
 </body>
 </html>

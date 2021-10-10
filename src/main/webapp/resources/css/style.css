@@ -1,15 +1,15 @@
 @charset "UTF-8";
 @font-face {
-   font-family: 'malgun';
-   src: local('malgun'),
-      url('/resources/font/malgun.ttf') format('truetype');
+   font-family: 'neodgm';
+   src: local('neodgm'),
+      url('/resources/font/neodgm_pro.ttf') format('truetype');
 }
 
 html, body {
 	margin: 0;
 	padding: 0;
 	color: #3E3A39;
-	font-family: 'malgun';
+	font-family: 'neodgm';
 	width: 100%;
 	height: 100%;
 }
