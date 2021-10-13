@@ -71,6 +71,9 @@
 		<option value="이니스프리 그린티  세럼">이니스프리 그린티  세럼</option>
 		<option value="이니스프리 레티놀 시카 흔적 앰플">이니스프리 레티놀 시카 흔적 앰플</option>
 		<option value="스킨앤랩 베리어덤 인텐시브 크림">스킨앤랩 베리어덤 인텐시브 크림</option>
+		<option value="닥터자르트 바이탈 하이드라 솔루션 바이옴 에센스">닥터자르트 바이탈 하이드라 솔루션 바이옴 에센스</option>
+		<option value="듀이트리 어반쉐이드 안티폴루션 선">듀이트리 어반쉐이드 안티폴루션 선</option>
+		<option value="리얼베리어 익스트림 크림">리얼베리어 익스트림 크림</option>
 	</select>
 	
 	<input type="text" id="cos_price">
