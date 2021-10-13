@@ -8,8 +8,6 @@
 	<title>하비델루</title>
 	
 	<!-- favicon -->
-	<link rel="icon" href="/resources/favicon/favicon.ico" type="image/x-icon">
-	
 	<link rel="apple-touch-icon" sizes="57x57" href="/resources/favicon/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="/resources/favicon/apple-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="/resources/favicon/apple-icon-72x72.png">
