@@ -66,13 +66,30 @@ public class UserController {
 	@Inject
 	private BCryptPasswordEncoder pwdEncoder;
 	
-	//일반사용자 로그인 화면
+	//사용자 메인 화면
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String User_Login(Model model, HttpSession session) throws Exception{
-		logger.info("일반사용자 로그인 화면");
+	public String User_Main(Model model, HttpSession session) throws Exception{
+		logger.info("사용자 메인 화면");
 		
 		return "/user/main";
 	}
+	
+	//사용자 메인 화면 하단 메뉴바 불러오기
+	@RequestMapping(value = "navigation", method = RequestMethod.GET)
+	public String User_Main_Bottom_Menu(Model model, HttpSession session) throws Exception{
+		logger.info("사용자 메인 화면 하단 메뉴바 불러오기");
+		
+		return "/user/navigation";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//일반사용자 로그인 액션
 	@ResponseBody

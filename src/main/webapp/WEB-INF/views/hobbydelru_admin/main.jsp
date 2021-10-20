@@ -11,13 +11,11 @@
 	<link rel="icon" href="/resources/favicon/favicon.ico" type="image/x-icon">
 	
 	<!-- css -->
-	<link rel="stylesheet" href="/resources/css/style.css" type="text/css">
-	<link rel="stylesheet" href="/resources/css/jquery.alerts.css" type="text/css">
+	<link rel="stylesheet" href="/resources/css/*" type="text/css">
 	
 	<!-- javascript -->
 	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-	<script type="text/JavaScript" src="/resources/js/javascript.js" ></script>
-	<script type="text/JavaScript" src="/resources/js/jquery.alerts.js" ></script>
+	<script type="text/JavaScript" src="/resources/js/*" ></script>
 </head>
 <body>
 	사번 : ${admin.kn_code} <br>
