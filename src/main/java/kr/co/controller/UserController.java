@@ -74,15 +74,53 @@ public class UserController {
 		return "/user/main";
 	}
 	
-	//사용자 메인 화면 하단 메뉴바 불러오기
-	@RequestMapping(value = "navigation", method = RequestMethod.GET)
-	public String User_Main_Bottom_Menu(Model model, HttpSession session) throws Exception{
-		logger.info("사용자 메인 화면 하단 메뉴바 불러오기");
+	//사용자 메인 화면 홈 불러오기
+	@RequestMapping(value = "home", method = RequestMethod.GET)
+	public String User_Main_Home(Model model, HttpSession session) throws Exception{
+		logger.info("사용자 메인 화면 홈 불러오기");
 		
-		return "/user/navigation";
+		return "/user/home";
+	}
+
+	//사용자 메인 화면 랭킹 불러오기
+	@RequestMapping(value = "ranking", method = RequestMethod.GET)
+	public String User_Main_Ranking(Model model, HttpSession session) throws Exception{
+		logger.info("사용자 메인 화면 랭킹 불러오기");
+		
+		return "/user/ranking";
 	}
 	
+	//사용자 메인 화면 하비델루 불러오기
+	@RequestMapping(value = "hobbydelru", method = RequestMethod.GET)
+	public String User_Main_Hobbydelru(Model model, HttpSession session) throws Exception{
+		logger.info("사용자 메인 화면 하비델루 불러오기");
+		
+		return "/user/hobbydelru";
+	}
 	
+	//사용자 메인 화면 요청 불러오기
+	@RequestMapping(value = "productrequest", method = RequestMethod.GET)
+	public String User_Main_Product_Request(Model model, HttpSession session) throws Exception{
+		logger.info("사용자 메인 화면 요청 불러오기");
+		
+		return "/user/productrequest";
+	}
+	
+	//사용자 메인 화면 내정보 불러오기
+	@RequestMapping(value = "myinfo", method = RequestMethod.GET)
+	public String User_Main_My_Info(Model model, HttpSession session) throws Exception{
+		logger.info("사용자 메인 화면 내정보 불러오기");
+		
+		return "/user/myinfo";
+	}
+	
+	//사용자 메인 화면 로그인 불러오기
+	@RequestMapping(value = "login", method = RequestMethod.GET)
+	public String User_Main_Login(Model model, HttpSession session) throws Exception{
+		logger.info("사용자 메인 화면 로그인 불러오기");
+		
+		return "/user/login";
+	}
 	
 	
 	
