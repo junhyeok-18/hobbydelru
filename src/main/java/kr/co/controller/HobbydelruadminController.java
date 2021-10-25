@@ -30,6 +30,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,9 +50,9 @@ import kr.co.vo.SearchCriteria;
 import kr.co.vo.UserVO;
 
 @Controller
-public class AdminController {
+public class HobbydelruadminController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+	private static final Logger logger = LoggerFactory.getLogger(HobbydelruadminController.class);
 
 	@Inject
 	private UserService user_service;
@@ -71,19 +72,19 @@ public class AdminController {
 	@Inject
 	private BCryptPasswordEncoder pwdEncoder;
 	
-	//관리사용자 로그인 화면
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String Admin_Login(Model model, HttpSession session) throws Exception{
-		logger.info("관리사용자 로그인 화면");
+	//하비델루 관리자 로그인 화면
+	@RequestMapping(value = "/hobbydelru_admin", method = RequestMethod.GET)
+	public String Hobbydelru_Admin_Login(Model model, HttpSession session) throws Exception{
+		logger.info("하비델루 관리자 로그인 화면");
 		
-		return "/admin/login";
+		return "/hobbydelru_admin/login";
 	}
 	
-	//관리사용자 로그인 액션
+	//하비델루 관리자 로그인 액션
 	@ResponseBody
-	@RequestMapping(value = "/admin/login_action", method = RequestMethod.POST)
-	public String Admin_LoginAction(UserVO uservo, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-		logger.info("관리사용자 로그인 액션");
+	@RequestMapping(value = "/hobbydelru_admin/logincheck", method = RequestMethod.POST)
+	public Object Hobbydelru_Admin_Login_Check(@RequestBody Map<String, String> admin_login, HttpSession session, HttpServletRequest request, Model model) throws Exception {
+		logger.info("하비델루 관리자 로그인 체크");
 
 		//자동로그인 클릭 유무
 		String auto_login_check = request.getParameter("auto_login");
@@ -120,6 +121,17 @@ public class AdminController {
 		
 		return login_check;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//관리사용자 로그아웃
 	@RequestMapping(value = "/admin/logout", method = RequestMethod.GET)

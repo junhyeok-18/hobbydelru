@@ -41,7 +41,8 @@ html, body {
 }
 
 .nav_image {
-	width: 50%;
+	width: 40%;
+	vertical-align: middle;
 }
 
 .nav_image[data-img-src="nav_hobbydelru"] {

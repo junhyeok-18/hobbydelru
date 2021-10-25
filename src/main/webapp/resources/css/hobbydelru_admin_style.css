@@ -1,0 +1,16 @@
+@charset "UTF-8";
+@font-face {
+	font-family: 'Pretendard';
+	font-style: normal;
+	font-display: swap;
+	src: local('Pretendard Variable'), url('/resources/font/PretendardVariable.woff2') format('woff2-variations');
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	color: #000000;
+	font-family: 'Pretendard';
+	width: 100%;
+	height: 100%;
+}
